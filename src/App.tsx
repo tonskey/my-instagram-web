@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Container } from '@mui/material';
 
 import { Routes } from '@/routing/Routes';

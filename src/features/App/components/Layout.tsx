@@ -34,7 +34,7 @@ export const Layout: FC = ({ children }) => {
         horizontal: 'right',
       }}
       id={menuId}
-      keepMounted
+      keepMounted={true}
       transformOrigin={{
         vertical: 'top',
         horizontal: 'right',
@@ -53,7 +53,7 @@ export const Layout: FC = ({ children }) => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='sticky'>
           <Toolbar>
-            <Typography variant='h6' noWrap component='div' sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Typography variant='h6' noWrap={true} component='div' sx={{ display: { xs: 'none', sm: 'block' } }}>
               My Instagram
             </Typography>
             <Box sx={{ flexGrow: 1 }} />

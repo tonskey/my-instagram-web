@@ -1,4 +1,4 @@
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Box, Button, Checkbox, FormControlLabel, Link, TextField, Typography } from '@mui/material';
@@ -9,6 +9,8 @@ import { useAuth } from '@/features/Auth';
 export const SignUp = () => {
   const navigate = useNavigate();
   const { isAuth } = useAuth();
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isAuth) {
@@ -24,10 +26,11 @@ export const SignUp = () => {
     const password = data.get('password')?.toString();
     if (email && password) {
       try {
-        const user = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(user);
+        setLoading(false);
+        await createUserWithEmailAndPassword(auth, email, password);
       } catch (err) {
         console.error(err);
+        setLoading(false);
       }
     }
   };
@@ -72,7 +75,7 @@ export const SignUp = () => {
           autoComplete='current-password'
         />
         <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
-        <Button type='submit' fullWidth variant='contained'>
+        <Button disabled={loading} type='submit' fullWidth={true} variant='contained'>
           Sign Up
         </Button>
         <Link component={RouterLink} to='/login' variant='body2'>

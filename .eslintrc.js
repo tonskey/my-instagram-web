@@ -23,7 +23,21 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'no-param-reassign': ['error', { props: false }],
-    'react/jsx-wrap-multilines': ['error', 'parens-new-line'],
-    'react/jsx-boolean-value': 'error',
+    'react/jsx-wrap-multilines': [
+      'error',
+      {
+        declaration: 'parens-new-line',
+        assignment: 'parens-new-line',
+        return: 'parens-new-line',
+        arrow: 'parens-new-line',
+        condition: 'ignore',
+        logical: 'ignore',
+        prop: 'ignore',
+      },
+    ],
+    'react/jsx-boolean-value': ['error', 'always'],
+    'object-curly-newline': 'off',
+    'max-len': 'off',
+    'no-console': ['error', { allow: ['error'] }],
   },
 };

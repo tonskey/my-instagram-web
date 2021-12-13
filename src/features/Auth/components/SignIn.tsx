@@ -82,11 +82,11 @@ export const SignIn = () => {
           autoComplete='current-password'
         />
         <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
-        <Button disabled={loading} type='submit' fullWidth variant='contained'>
+        <Button disabled={loading} type='submit' fullWidth={true} variant='contained'>
           Sign In
         </Button>
         <Link component={RouterLink} to='/registration' variant='body2'>
-          Don't have an account? Sign Up
+          Don&apos;t have an account? Sign Up
         </Link>
       </Box>
     </Box>
