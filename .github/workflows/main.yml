@@ -9,30 +9,38 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-
       - name: Install NPM packages
         run: npm ci
-
       - name: Run linters
         run: npm run lint
-
       - name: Run type-check
         run: npm run type-check
 
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Install NPM packages
+        run: npm ci
       - name: Build project
         run: npm run build
-
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         with:
