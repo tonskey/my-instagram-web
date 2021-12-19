@@ -16,7 +16,7 @@ export const SignUp = () => {
     if (isAuth) {
       navigate('/', { replace: true });
     }
-  }, []);
+  }, [isAuth, navigate]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

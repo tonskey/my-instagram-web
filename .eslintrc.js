@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'plugin:react/jsx-runtime'],
+  extends: ['plugin:react/recommended', 'airbnb', 'plugin:react-hooks/recommended', 'plugin:react/jsx-runtime'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -14,15 +14,9 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'jsx-quotes': ['error', 'prefer-single'],
-    'import/prefer-default-export': 'off',
     'react/function-component-definition': 'off',
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/jsx-one-expression-per-line': 'off',
-    'import/no-extraneous-dependencies': 'off',
-    'import/no-unresolved': 'off',
-    'import/extensions': 'off',
-    'no-param-reassign': ['error', { props: false }],
     'react/jsx-wrap-multilines': [
       'error',
       {
@@ -36,6 +30,14 @@ module.exports = {
       },
     ],
     'react/jsx-boolean-value': ['error', 'always'],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
+    'jsx-quotes': ['error', 'prefer-single'],
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
+    'no-param-reassign': ['error', { props: false }],
     'object-curly-newline': 'off',
     'max-len': 'off',
     'no-console': ['error', { allow: ['error'] }],

@@ -19,7 +19,7 @@ export const SignIn = () => {
     if (isAuth) {
       navigate('/', { replace: true });
     }
-  }, []);
+  }, [isAuth, navigate]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
