@@ -1,4 +1,6 @@
 import * as aws from '@pulumi/aws';
+import { spawn } from 'child_process';
+import { resolve } from 'path';
 
 const BUCKET_NAME = 'my-instagram';
 
@@ -27,5 +29,22 @@ new aws.s3.BucketPolicy('bucketPolicy', {
   policy: siteBucket.bucket.apply(publicReadPolicyForBucket),
 });
 
+siteBucket.bucket.apply((name) => {
+  spawn(
+    'aws',
+    [
+      's3',
+      'sync',
+      '--acl',
+      'public-read',
+      '--follow-symlinks',
+      '--delete',
+      `${resolve(__dirname, '../dist')}`,
+      `s3://${name}`,
+    ],
+    {
+      stdio: 'inherit',
+    },
+  );
+});
 exports.websiteUrl = siteBucket.websiteEndpoint;
-exports.bucketName = BUCKET_NAME;

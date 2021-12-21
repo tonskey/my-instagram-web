@@ -1,9 +1,5 @@
 {
   "name": "my-instagram",
-  "scripts": {
-    "start": "./node_modules/ts-node/dist/bin.js start.ts",
-    "destroy": "npm run destroy"
-  },
   "devDependencies": {
     "@types/node": "^14"
   },
