@@ -37,9 +37,11 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
+    'import/no-import-module-exports': 'off',
     'no-param-reassign': ['error', { props: false }],
     'object-curly-newline': 'off',
     'max-len': 'off',
     'no-console': ['error', { allow: ['error'] }],
+    'no-new': 'off',
   },
 };

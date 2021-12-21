@@ -1,9 +1,31 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";
-import * as awsx from "@pulumi/awsx";
+import * as aws from '@pulumi/aws';
 
-// Create an AWS resource (S3 Bucket)
-const bucket = new aws.s3.Bucket("my-instagram");
+const BUCKET_NAME = 'my-instagram';
 
-// Export the name of the bucket
-export const bucketName = bucket.id;
+const siteBucket = new aws.s3.Bucket(BUCKET_NAME, {
+  website: {
+    indexDocument: 'index.html',
+  },
+});
+
+function publicReadPolicyForBucket(bucketName: string) {
+  return JSON.stringify({
+    Version: '2012-10-17',
+    Statement: [
+      {
+        Effect: 'Allow',
+        Principal: '*',
+        Action: ['s3:DeleteObject', 's3:GetObject', 's3:ListBucket', 's3:PutObject', 's3:PutObjectAcl'],
+        Resource: [`arn:aws:s3:::${bucketName}`, `arn:aws:s3:::${bucketName}/*`],
+      },
+    ],
+  });
+}
+
+new aws.s3.BucketPolicy('bucketPolicy', {
+  bucket: siteBucket.bucket,
+  policy: siteBucket.bucket.apply(publicReadPolicyForBucket),
+});
+
+exports.websiteUrl = siteBucket.websiteEndpoint;
+exports.bucketName = BUCKET_NAME;
